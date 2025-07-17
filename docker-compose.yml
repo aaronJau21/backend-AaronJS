@@ -1,0 +1,9 @@
+services:
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_DATABASE: aaronjs
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo:/data/db
