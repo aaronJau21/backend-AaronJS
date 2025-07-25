@@ -6,7 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   providers: [HashService, JsonWebTokenService],
-  exports: [HashService,JsonWebTokenService],
+  exports: [HashService, JsonWebTokenService, JwtModule, ConfigModule],
   imports: [
     ConfigModule,
     JwtModule.registerAsync({
@@ -14,7 +14,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       useFactory: async (configService: ConfigService) => ({
         global: true,
         secret: configService.get<string>('TOKEN_SECRET'),
-        signOptions: { expiresIn: '1h' }
+        signOptions: { expiresIn: '1h' },
       }),
       inject: [ConfigService],
     }),
