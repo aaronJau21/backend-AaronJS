@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User } from './entities/user.entity';
 import { Model } from 'mongoose';
 import { HashService } from 'src/shared/hash/hash.service';
+import { Role } from 'src/role/entities/role.entity';
 
 @Injectable()
 export class UserService {
