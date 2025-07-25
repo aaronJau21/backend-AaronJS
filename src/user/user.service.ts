@@ -4,19 +4,22 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './entities/user.entity';
 import { Model } from 'mongoose';
-import * as argon from 'argon2';
+import { HashService } from 'src/shared/hash/hash.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User.name)
     private userModel: Model<User>,
+    private readonly hashService: HashService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const {password, ...rest} = createUserDto;
-    const passwordHash = await argon.hash(createUserDto.password);
-    const user = new this.userModel({password: passwordHash, ...rest});
+    const { password, ...rest } = createUserDto;
+    const passwordHash = await this.hashService.hashPassword(
+      createUserDto.password,
+    );
+    const user = new this.userModel({ password: passwordHash, ...rest });
     return await user.save();
   }
 
@@ -35,5 +38,9 @@ export class UserService {
 
   remove(id: number) {
     return `This action removes a #${id} user`;
+  }
+
+  async findByEmail(email: string) {
+    return await this.userModel.findOne({ email }).exec();
   }
 }
