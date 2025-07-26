@@ -1,4 +1,6 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { Types } from 'mongoose';
+import { ProjectStatus } from 'src/shared/enum/project/status.enum';
 
 export class CreateProyectDto {
   @IsString()
@@ -8,6 +10,16 @@ export class CreateProyectDto {
   @IsOptional()
   description?: string;
 
+  @IsEnum(ProjectStatus)
+  estado: ProjectStatus;
+
   @IsString()
-  estado: string;
+  fecha_inicio: string;
+
+  @IsString()
+  @IsOptional()
+  fecha_fin?: string;
+
+  @IsString()
+  client: Types.ObjectId;
 }

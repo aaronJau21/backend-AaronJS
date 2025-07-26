@@ -6,6 +6,7 @@ import { RoleModule } from './role/role.module';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { ProyectsModule } from './proyects/proyects.module';
+import { TaskModule } from './task/task.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ProyectsModule } from './proyects/proyects.module';
     AuthModule,
     SharedModule,
     ProyectsModule,
+    TaskModule,
   ],
 })
 export class AppModule {}

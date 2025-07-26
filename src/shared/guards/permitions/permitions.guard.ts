@@ -27,8 +27,6 @@ export class PermitionsGuard implements CanActivate {
       userPermissions.includes(permission),
     );
 
-    console.log('✅ ¿Tiene todos los permisos requeridos?:', hasPermission);
-
     if (!hasPermission) {
       throw new ForbiddenException('No tienes permisos suficientes');
     }
