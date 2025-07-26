@@ -20,11 +20,11 @@ export class ProyectsService {
     return project;
   }
 
-  findAll(role: IJwtUser) {
-    if (role.role === 'Administrador') {
+  findAll(user: IJwtUser) {
+    if (user.role === 'Administrador') {
       return this.proyectRepository.find().exec();
-    } else if (role.role === 'Client') {
-      return this.proyectRepository.find({ client: role.id }).exec();
+    } else if (user.role === 'Client') {
+      return this.proyectRepository.find({ client: user.id }).exec();
     } 
   }
 

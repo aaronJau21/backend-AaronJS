@@ -32,8 +32,8 @@ export class ProyectsController {
   @Permissions('proyect:read')
   @Get()
   findAll(@Req() req: Request) {
-    const role: IJwtUser = req['user'];
-    return this.proyectsService.findAll(role);
+    const user: IJwtUser = req['user'];
+    return this.proyectsService.findAll(user);
   }
 
   @Get(':id')
