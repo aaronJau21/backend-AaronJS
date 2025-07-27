@@ -22,10 +22,10 @@ export class ProyectsService {
 
   findAll(user: IJwtUser) {
     if (user.role === 'Administrador') {
-      return this.proyectRepository.find().exec();
+      return this.proyectRepository.find().populate('client','fullName').exec();
     } else if (user.role === 'Client') {
-      return this.proyectRepository.find({ client: user.id }).exec();
-    } 
+      return this.proyectRepository.find({ client: user.id }).populate('client','fullName').exec();
+    }
   }
 
   findOne(id: number) {
