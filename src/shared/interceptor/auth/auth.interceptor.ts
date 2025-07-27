@@ -12,14 +12,18 @@ export class AuthInterceptor implements NestInterceptor {
     return next.handle().pipe(
       map((data) => {
         const {
-          user: { fullName, email, role },
+          user: {
+            fullName,
+            email,
+            role: { name },
+          },
           token,
         } = data;
         return {
           user: {
             fullName,
             email,
-            role,
+            role: { name },
           },
           token,
         };

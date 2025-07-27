@@ -5,7 +5,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User } from './entities/user.entity';
 import { Model } from 'mongoose';
 import { HashService } from 'src/shared/hash/hash.service';
-import { Role } from 'src/role/entities/role.entity';
 
 @Injectable()
 export class UserService {
@@ -42,6 +41,6 @@ export class UserService {
   }
 
   async findByEmail(email: string) {
-    return await this.userModel.findOne({ email }).exec();
+    return await this.userModel.findOne({ email }).populate('role').exec();
   }
 }
